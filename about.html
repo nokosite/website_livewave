@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - LiveWave.id</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        /* Root Variables */
+        :root {
+            --primary-blue: #60a5fa;
+            --light-blue: #93c5fd;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+
+            /* Container Variables */
+            --container-max-width: 1000px;          /* Mengurangi max-width dari 1200px */
+            --container-padding-desktop: 1.5rem;    /* Mengurangi padding desktop */
+            --container-padding-tablet: 1.25rem;    /* Mengurangi padding tablet */
+            --container-padding-mobile: 1rem;
+            --container-spacer-desktop: 1.5rem;     /* Mengurangi spacer desktop */
+            --container-spacer-tablet: 1.25rem;     /* Mengurangi spacer tablet */
+            --container-spacer-mobile: 1rem;
+
+            /* Typography Variables */
+            --text-base: 0.9375rem;                /* 15px - Ukuran teks dasar */
+            --text-lg: 1.125rem;                   /* 18px */
+            --text-xl: 1.25rem;                    /* 20px */
+            --text-2xl: 1.5rem;                    /* 24px */
+            --text-3xl: 1.875rem;                  /* 30px */
+            --text-4xl: 2.25rem;                   /* 36px */
+            --text-5xl: 3rem;                      /* 48px */
+        }
+        
+        /* Base Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            font-size: var(--text-base);
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            height: 4rem;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .navbar-brand {
+            font-size: var(--text-xl);
+            font-weight: 600;
+        }
+
+        .nav-link {
+            font-size: var(--text-base);
+            padding: 0.5rem 1rem;
+        }
+
+        /* Heading Styles */
+        h1 {
+            font-size: var(--text-4xl);
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: var(--text-3xl);
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: var(--text-2xl);
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: var(--text-xl);
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        /* Content Styles */
+        .content-text {
+            font-size: var(--text-base);
+            line-height: 1.6;
+        }
+
+        .content-text-lg {
+            font-size: var(--text-lg);
+            line-height: 1.6;
+        }
+
+        /* Card Styles */
+        .card {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: var(--text-xl);
+            margin-bottom: 0.75rem;
+        }
+
+        .card-text {
+            font-size: var(--text-base);
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 0.625rem 1.25rem;
+            font-size: var(--text-base);
+        }
+
+        .btn-lg {
+            padding: 0.75rem 1.5rem;
+            font-size: var(--text-lg);
+        }
+
+        /* Existing Styles */
+        .bg-blue-soft {
+            background-color: #e0f2fe;
+        }
+
+        .text-blue-soft {
+            color: #0284c7;
+        }
+
+        .border-blue-soft {
+            border-color: #bae6fd;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm navbar">
+        <div class="container-with-spacer">
+            <div class="flex justify-between items-center h-full">
+                <a href="index.html" class="navbar-brand text-blue-soft">
+                    LiveWave<span class="text-primary-blue">.id</span>
+                </a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#services" class="nav-link">Layanan</a>
+                    <a href="index.html#pricing" class="nav-link">Pricelist</a>
+                    <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+                    <a href="about.html" class="nav-link text-primary-blue">Tentang Kami</a>
+                </div>
+                <button class="md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="pt-24 pb-16 bg-off-white">
+        <div class="container-with-spacer">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl font-bold mb-4">Tentang LiveWave.id</h1>
+                <p class="content-text-lg mb-8">
+                    Kami adalah tim profesional yang berdedikasi untuk memberikan solusi multimedia dan streaming terbaik untuk acara Anda.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission -->
+    <section class="py-16 bg-white">
+        <div class="container-with-spacer">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="card bg-off-white rounded-xl border border-blue-soft">
+                    <h2 class="text-2xl font-bold mb-4 text-blue-soft">Visi Kami</h2>
+                    <p class="content-text">
+                        Menjadi penyedia layanan multimedia dan streaming terpercaya yang mengutamakan kualitas dan inovasi dalam setiap proyek.
+                    </p>
+                </div>
+                <div class="card bg-off-white rounded-xl border border-blue-soft">
+                    <h2 class="text-2xl font-bold mb-4 text-blue-soft">Misi Kami</h2>
+                    <p class="content-text">
+                        Memberikan solusi multimedia yang profesional, inovatif, dan terjangkau untuk membantu kesuksesan acara klien kami.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-20 bg-off-white">
+        <div class="container-with-spacer">
+            <h2 class="text-3xl font-bold text-center mb-12">Tim Kami</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Team Member 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-blue-soft text-center">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://placehold.co/400x400" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">John Doe</h3>
+                    <p class="text-blue-soft mb-4">Creative Director</p>
+                    <p class="text-gray-600">
+                        Lebih dari 10 tahun pengalaman dalam industri multimedia dan broadcasting.
+                    </p>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-blue-soft text-center">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://placehold.co/400x400" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Jane Smith</h3>
+                    <p class="text-blue-soft mb-4">Technical Director</p>
+                    <p class="text-gray-600">
+                        Ahli dalam setup streaming dan hybrid meeting dengan pengalaman di berbagai event besar.
+                    </p>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-blue-soft text-center">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://placehold.co/400x400" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Mike Johnson</h3>
+                    <p class="text-blue-soft mb-4">Production Manager</p>
+                    <p class="text-gray-600">
+                        Spesialis dalam manajemen produksi dan koordinasi tim untuk event berskala besar.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-20 bg-white">
+        <div class="container-with-spacer">
+            <h2 class="text-3xl font-bold text-center mb-12">Nilai-Nilai Kami</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-soft rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-soft" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Kualitas</h3>
+                    <p class="text-gray-600">Mengutamakan kualitas dalam setiap aspek layanan kami.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-soft rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-soft" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Inovasi</h3>
+                    <p class="text-gray-600">Terus berinovasi untuk memberikan solusi terbaik.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-soft rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-soft" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Kolaborasi</h3>
+                    <p class="text-gray-600">Bekerja sama untuk mencapai hasil terbaik.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-soft rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-soft" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Keandalan</h3>
+                    <p class="text-gray-600">Dapat diandalkan dalam setiap proyek yang kami tangani.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white text-text-dark py-12 border-t border-blue-soft">
+        <div class="container-with-spacer">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold text-blue-soft">
+                        LiveWave<span class="text-primary-blue">.id</span>
+                    </h3>
+                    <p class="text-gray-600">
+                        Solusi multimedia dan streaming profesional untuk berbagai jenis acara Anda.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Layanan</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><a href="index.html#services" class="hover:text-primary-blue transition-colors">Multicam</a></li>
+                        <li><a href="index.html#services" class="hover:text-primary-blue transition-colors">Hybrid Meeting</a></li>
+                        <li><a href="index.html#services" class="hover:text-primary-blue transition-colors">Streaming</a></li>
+                        <li><a href="index.html#services" class="hover:text-primary-blue transition-colors">Dokumentasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><a href="index.html" class="hover:text-primary-blue transition-colors">Home</a></li>
+                        <li><a href="index.html#services" class="hover:text-primary-blue transition-colors">Layanan</a></li>
+                        <li><a href="index.html#pricing" class="hover:text-primary-blue transition-colors">Pricelist</a></li>
+                        <li><a href="index.html#portfolio" class="hover:text-primary-blue transition-colors">Portfolio</a></li>
+                        <li><a href="about.html" class="hover:text-primary-blue transition-colors">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Kontak</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>Email: info@livewave.id</li>
+                        <li>Phone: +62 812-3456-7890</li>
+                        <li>Alamat: Jl. Multimedia No. 123, Jakarta Selatan</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-blue-soft mt-12 pt-8 text-center text-text-light">
+                <p>&copy; 2024 LiveWave.id. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP Animations -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Fade in elements on scroll
+        gsap.utils.toArray('.grid > div').forEach((element, i) => {
+            gsap.from(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top bottom-=100",
+                    toggleActions: "play none none reverse"
+                },
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                delay: i * 0.2,
+                ease: "power3.out"
+            });
+        });
+    </script>
+</body>
+</html> 
