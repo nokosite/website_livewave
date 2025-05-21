@@ -1,0 +1,52 @@
+{
+    "packages": [
+        {
+            "id": "basic",
+            "name": "Basic Package",
+            "price": 2.5,
+            "currency": "Rp",
+            "unit": "juta",
+            "period": "event",
+            "isPopular": false,
+            "features": [
+                "2 Kamera HD",
+                "Streaming 720p",
+                "Dokumentasi Foto (50 foto)"
+            ],
+            "buttonStyle": "secondary"
+        },
+        {
+            "id": "professional",
+            "name": "Professional Package",
+            "price": 5,
+            "currency": "Rp",
+            "unit": "juta",
+            "period": "event",
+            "isPopular": true,
+            "features": [
+                "4 Kamera Full HD",
+                "Streaming 1080p",
+                "Dokumentasi Foto (100 foto)",
+                "Hybrid Meeting Setup"
+            ],
+            "buttonStyle": "primary"
+        },
+        {
+            "id": "premium",
+            "name": "Premium Package",
+            "price": 8,
+            "currency": "Rp",
+            "unit": "juta",
+            "period": "event",
+            "isPopular": false,
+            "features": [
+                "6 Kamera 4K",
+                "Streaming 4K",
+                "Dokumentasi Foto (200 foto)",
+                "Full Hybrid Meeting Setup",
+                "Video Highlight"
+            ],
+            "buttonStyle": "secondary"
+        }
+    ]
+} 

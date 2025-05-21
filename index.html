@@ -11,14 +11,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <!-- Custom CSS -->
     <style>
-        /* Root Variables */
+        /* Root Variables - Updated Colors */
         :root {
-            --primary-blue: #60a5fa;
-            --light-blue: #93c5fd;
+            /* Primary Colors */
+            --primary-blue: #1e40af;              /* Biru tua/kontras */
+            --light-blue: #3b82f6;                /* Biru medium */
+            --soft-blue: #93c5fd;                 /* Biru muda */
+            --hover-blue: #1e3a8a;                /* Biru hover lebih gelap */
+            
+            /* Accent Colors */
+            --accent-blue: #60a5fa;               /* Biru aksen */
+            --accent-light: #bfdbfe;              /* Biru aksen muda */
+            --accent-soft: #dbeafe;               /* Biru aksen sangat muda */
+            
+            /* White & Gray */
             --white: #ffffff;
             --off-white: #f8fafc;
             --text-dark: #1e293b;
             --text-light: #64748b;
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #bfdbfe 0%, #dbeafe 100%);
+            --gradient-accent: linear-gradient(135deg, #93c5fd 0%, #bfdbfe 100%);
+            --gradient-dark: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            
+            /* Patterns */
+            --pattern-dots: radial-gradient(#3b82f6 1px, transparent 1px);
+            --pattern-lines: linear-gradient(45deg, #3b82f6 1px, transparent 1px);
 
             /* Container Variables */
             --container-max-width: 1000px;          /* Mengurangi max-width dari 1200px */
@@ -113,7 +132,7 @@
             height: 2px;
             bottom: -2px;
             left: 0;
-            background-color: var(--primary-blue);
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-red));
             transition: width 0.3s ease;
         }
 
@@ -122,15 +141,27 @@
         }
 
         .bg-blue-soft {
-            background-color: #e0f2fe;
+            background-color: #bfdbfe;
+        }
+
+        .bg-red-soft {
+            background-color: #fecaca;
         }
 
         .text-blue-soft {
-            color: #0284c7;
+            color: #2563eb;
+        }
+
+        .text-red-soft {
+            color: #dc2626;
         }
 
         .border-blue-soft {
-            border-color: #bae6fd;
+            border-color: #93c5fd;
+        }
+
+        .border-red-soft {
+            border-color: #fecaca;
         }
 
         /* Navbar Styles */
@@ -143,6 +174,11 @@
         .navbar-brand {
             font-size: var(--text-xl);             /* 20px */
             font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .navbar-brand span {
+            color: var(--light-blue);
         }
 
         /* Heading Styles */
@@ -156,6 +192,21 @@
             font-size: var(--text-3xl);            /* 30px */
             line-height: 1.3;
             font-weight: 700;
+            color: var(--primary-blue);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
+            border-radius: 2px;
         }
 
         h3 {
@@ -207,72 +258,169 @@
             font-size: var(--text-lg);             /* 18px */
         }
 
-        /* Hero Section Specific Styles */
-        .hero-title {
-            font-size: var(--text-4xl);            /* 32px */
-            line-height: 1.3;
-            letter-spacing: -0.02em;               /* Sedikit lebih rapat */
-            margin-bottom: 1.25rem;                /* 20px */
+        /* Hero Section Styles - Updated */
+        .hero-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
-        .hero-title span {
-            display: block;                        /* Memisahkan baris */
-            font-size: var(--text-3xl);            /* 28px */
-            margin-top: 0.25rem;                   /* 4px */
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(147, 197, 253, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(191, 219, 254, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(219, 234, 254, 0.1) 0%, transparent 70%);
+            opacity: 1;
+            z-index: 0;
+            animation: gradientShift 20s ease infinite;
         }
 
-        .hero-description {
-            font-size: var(--text-lg);             /* 18px */
-            line-height: 1.6;
-            max-width: 28rem;                      /* 448px - Lebih sempit */
-            margin-bottom: 2rem;                   /* 32px */
-        }
-
-        .hero-image {
-            max-width: 24rem;                      /* 384px - Lebih kecil */
-            margin: 0 auto;
-            border-radius: 0.75rem;                /* 12px */
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        .hero-gradient::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(-45deg, rgba(96, 165, 250, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.5;
+            z-index: 0;
+            animation: patternMove 30s linear infinite;
         }
 
         .hero-content {
-            max-width: 32rem;                      /* 512px - Lebih sempit */
+            max-width: 36rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            position: relative;
+            background: linear-gradient(90deg, 
+                #1e40af 0%, 
+                #3b82f6 25%, 
+                #60a5fa 50%, 
+                #93c5fd 75%, 
+                #1e40af 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 8s linear infinite;
+        }
+
+        .hero-title span {
+            display: block;
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            margin-top: 0.5rem;
+            background: linear-gradient(90deg, 
+                #3b82f6 0%, 
+                #60a5fa 25%, 
+                #93c5fd 50%, 
+                #bfdbfe 75%, 
+                #3b82f6 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 8s linear infinite reverse;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-image-container {
+            position: relative;
+            z-index: 1;
+            perspective: 1000px;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 28rem;
+            border-radius: 1rem;
+            box-shadow: 
+                0 20px 40px -15px rgba(30, 64, 175, 0.15),
+                0 10px 20px -10px rgba(59, 130, 246, 0.1);
+            transform: rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+            opacity: 0;
+            animation: fadeInRight 1s ease forwards 0.7s;
+        }
+
+        .hero-image:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.02);
         }
 
         .hero-buttons {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;               /* Button sejajar ke kiri */
-            gap: 0.75rem;                         /* 12px - Spacing antar button */
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.9s;
         }
 
         .hero-btn {
-            padding: 0.75rem 1.5rem;              /* 12px 24px - Ukuran sama untuk kedua button */
-            font-size: var(--text-base);          /* 15px */
-            min-width: 10rem;                     /* 160px - Ukuran sama untuk kedua button */
-            border-radius: 0;                     /* Menghapus border radius */
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 12rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-btn-primary {
-            background-color: var(--primary-blue); /* #60a5fa */
+            background: linear-gradient(90deg, #1e40af, #3b82f6);
             color: white;
-            border: 2px solid var(--primary-blue);
+            border: none;
+            box-shadow: 0 4px 15px -3px rgba(30, 64, 175, 0.2);
         }
 
         .hero-btn-primary:hover {
-            background-color: var(--light-blue);   /* #93c5fd */
-            border-color: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -5px rgba(30, 64, 175, 0.3);
+            background: linear-gradient(90deg, #1e3a8a, #2563eb);
         }
 
         .hero-btn-secondary {
-            background-color: transparent;
-            color: var(--primary-blue);           /* #60a5fa */
-            border: 2px solid var(--primary-blue);
+            background: white;
+            color: #1e40af;
+            border: 2px solid #3b82f6;
+            box-shadow: 0 4px 15px -3px rgba(59, 130, 246, 0.1);
         }
 
         .hero-btn-secondary:hover {
-            background-color: var(--primary-blue); /* #60a5fa */
+            background: #3b82f6;
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -5px rgba(59, 130, 246, 0.2);
         }
 
         @media (min-width: 640px) {
@@ -280,21 +428,292 @@
                 flex-direction: row;
                 align-items: center;
             }
+
+            .hero-image {
+                max-width: 32rem;
+            }
         }
 
         @media (min-width: 768px) {
-            .hero-title {
-                font-size: var(--text-5xl);        /* 40px di desktop */
-            }
-
-            .hero-title span {
-                font-size: var(--text-4xl);        /* 32px di desktop */
+            .hero-content {
+                max-width: 40rem;
             }
 
             .hero-image {
-                max-width: 28rem;                  /* 448px di desktop */
+                max-width: 36rem;
             }
         }
+
+        @media (min-width: 1024px) {
+            .hero-content {
+                max-width: 44rem;
+            }
+
+            .hero-image {
+                max-width: 40rem;
+            }
+        }
+
+        /* Hero Section Animation Keyframes */
+        @keyframes gradientShift {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 80px 80px; }
+        }
+
+        @keyframes textGradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px) rotateY(-5deg) rotateX(5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotateY(-5deg) rotateX(5deg);
+            }
+        }
+
+        /* Services Section Styles */
+        .services-card {
+            padding: 1.25rem;                     /* 20px - Lebih kecil dari sebelumnya */
+            background: white;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            height: 100%;                         /* Memastikan tinggi sama */
+        }
+
+        .services-card:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 4px 6px -1px rgba(30, 64, 175, 0.1), 0 2px 4px -2px rgba(59, 130, 246, 0.1);
+        }
+
+        .services-icon {
+            width: 3rem;                          /* 48px - Lebih kecil */
+            height: 3rem;                         /* 48px - Lebih kecil */
+            background: linear-gradient(135deg, #bfdbfe 0%, #dbeafe 100%);
+            border-radius: 0.75rem;               /* 12px */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .services-card:hover .services-icon {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+        }
+
+        .services-icon svg {
+            width: 1.5rem;                        /* 24px */
+            height: 1.5rem;                       /* 24px */
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        .services-card:hover .services-icon svg {
+            color: white;
+        }
+
+        .services-title {
+            font-size: var(--text-lg);            /* 18px */
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .services-description {
+            font-size: var(--text-base);          /* 15px */
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* Section Backgrounds */
+        .section-pattern {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-pattern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: var(--pattern-dots);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .section-gradient {
+            background: var(--gradient-primary);
+            position: relative;
+        }
+
+        .section-gradient::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: var(--pattern-lines);
+            background-size: 30px 30px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Services Section Background */
+        .services-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #dbeafe 100%);
+            position: relative;
+        }
+
+        .services-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                var(--pattern-dots),
+                var(--pattern-lines);
+            background-size: 20px 20px, 30px 30px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* Pricing Section Background */
+        .pricing-bg {
+            background: linear-gradient(135deg, #ffffff 0%, #bfdbfe 100%);
+            position: relative;
+        }
+
+        .pricing-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 10% 90%, #93c5fd 0%, transparent 40%),
+                radial-gradient(circle at 90% 10%, #bfdbfe 0%, transparent 40%);
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        /* Portfolio Section Background */
+        .portfolio-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #dbeafe 100%);
+            position: relative;
+        }
+
+        .portfolio-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: var(--pattern-dots);
+            background-size: 25px 25px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* About Section Background */
+        .about-bg {
+            background: linear-gradient(135deg, #ffffff 0%, #bfdbfe 100%);
+            position: relative;
+        }
+
+        .about-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 80% 20%, #93c5fd 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, #bfdbfe 0%, transparent 50%);
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        /* Contact Section Background */
+        .contact-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #dbeafe 100%);
+            position: relative;
+        }
+
+        .contact-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                var(--pattern-dots),
+                var(--pattern-lines);
+            background-size: 20px 20px, 30px 30px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* Remove old section title styles */
+        /* .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            margin: 0 auto;
+            margin-bottom: 1rem;
+        }
+
+        .section-title h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: var(--text-lg);
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 1rem;
+        } */
     </style>
 </head>
 <body class="min-h-screen">
@@ -322,245 +741,115 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-gradient min-h-screen flex items-center pt-16">
-        <div class="container-with-spacer py-20">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
-                <div class="hero-content space-y-6">
-                    <h1 class="hero-title font-bold">
+    <section id="home" class="hero-gradient">
+        <div class="container-with-spacer py-16 md:py-24">
+            <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-20">
+                <!-- Konten Kiri -->
+                <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <h1 class="text-4xl font-bold text-blue-800 mb-3">
                         Solusi Multimedia & 
-                        <span class="text-primary-blue">Streaming Profesional</span>
+                        <span class="block text-2xl font-bold text-blue-800">Streaming Profesional</span>
                     </h1>
-                    <p class="hero-description text-gray-600">
-                        Kami menyediakan layanan multicam, hybrid meeting, streaming, dan dokumentasi untuk berbagai jenis acara Anda.
+                    <p class="text-base md:text-xs text-gray-600 mt-2 mb-8 max-w-xl">
+                        Kami menyediakan layanan multicam, hybrid meeting, streaming, dan dokumentasi untuk berbagai jenis acara Anda dengan kualitas terbaik dan tim profesional.
                     </p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="hero-btn hero-btn-primary transition-colors text-center">
-                            Hubungi Kami
-                        </a>
-                        <a href="#services" class="hero-btn hero-btn-secondary transition-colors text-center">
-                            Lihat Layanan
-                        </a>
+                    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start">
+                        <a href="#contact" class="hero-btn hero-btn-primary w-full sm:w-auto px-5 py-2 text-sm rounded-md">Hubungi Kami</a>
+                        <a href="#services" class="hero-btn hero-btn-secondary w-full sm:w-auto px-5 py-2 text-sm rounded-md">Lihat Layanan</a>
                     </div>
                 </div>
-                <div class="md:w-1/2 mt-8 md:mt-0">
-                    <img src="https://placehold.co/600x400" alt="Hero Image" class="hero-image w-full">
+                <!-- Gambar Kanan -->
+                <div class="w-full lg:w-1/2 flex justify-center items-center mb-8 lg:mb-0">
+                    <img src="assets/dokumentasi/img_1.jpeg" alt="LiveWave.id - Solusi Multimedia & Streaming Profesional" class="w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-48 md:h-64 lg:h-80 object-cover shadow-xl rounded-md">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 bg-off-white">
-        <div class="container-with-spacer">
-            <h2 class="text-3xl font-bold text-center mb-8">Layanan Kami</h2>
+    <section id="services" class="py-16 services-bg">
+        <div class="container-with-spacer section-content">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold text-blue-800 mb-3">Layanan Kami</h2>
+                <p class="text-gray-500 text-sm">Solusi multimedia dan streaming profesional untuk berbagai jenis acara Anda</p>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Multicam -->
-                <div class="card bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-blue-soft">
-                    <div class="w-16 h-16 bg-blue-soft rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-8 h-8 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="services-card rounded-xl">
+                    <div class="services-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Multicam</h3>
-                    <p class="text-gray-600">Produksi video profesional dengan multiple kamera untuk acara Anda.</p>
+                    <h3 class="services-title">Multicam</h3>
+                    <p class="services-description">Produksi video profesional dengan multiple kamera untuk acara Anda.</p>
                 </div>
 
                 <!-- Hybrid Meeting -->
-                <div class="card bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-blue-soft">
-                    <div class="w-16 h-16 bg-blue-soft rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-8 h-8 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="services-card rounded-xl">
+                    <div class="services-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Hybrid Meeting</h3>
-                    <p class="text-gray-600">Solusi meeting hybrid yang menghubungkan peserta online dan offline.</p>
+                    <h3 class="services-title">Hybrid Meeting</h3>
+                    <p class="services-description">Solusi meeting hybrid yang menghubungkan peserta online dan offline.</p>
                 </div>
 
                 <!-- Streaming -->
-                <div class="card bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-blue-soft">
-                    <div class="w-16 h-16 bg-blue-soft rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-8 h-8 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="services-card rounded-xl">
+                    <div class="services-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Streaming</h3>
-                    <p class="text-gray-600">Layanan streaming berkualitas tinggi untuk berbagai platform.</p>
+                    <h3 class="services-title">Streaming</h3>
+                    <p class="services-description">Layanan streaming berkualitas tinggi untuk berbagai platform.</p>
                 </div>
 
                 <!-- Dokumentasi -->
-                <div class="card bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-blue-soft">
-                    <div class="w-16 h-16 bg-blue-soft rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-8 h-8 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="services-card rounded-xl">
+                    <div class="services-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Dokumentasi</h3>
-                    <p class="text-gray-600">Dokumentasi foto dan video profesional untuk acara Anda.</p>
+                    <h3 class="services-title">Dokumentasi</h3>
+                    <p class="services-description">Dokumentasi foto dan video profesional untuk acara Anda.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-white">
+    <section id="pricing" class="py-16 bg-gradient-to-b from-white to-blue-50">
         <div class="container-with-spacer">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Pricelist Layanan</h2>
-            <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-                Pilih paket layanan yang sesuai dengan kebutuhan acara Anda
-            </p>
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold text-blue-800 mb-3">Pricelist Layanan</h2>
+                <p class="text-gray-500 text-sm">Pilih paket layanan yang sesuai dengan kebutuhan acara Anda</p>
+            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Basic Package -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden transform hover:scale-105 transition-transform border border-blue-soft">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-4">Basic Package</h3>
-                        <div class="text-4xl font-bold text-blue-soft mb-6">
-                            Rp 2.500.000
-                            <span class="text-lg text-gray-500 font-normal">/event</span>
-                        </div>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                2 Kamera HD
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Streaming 720p
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Dokumentasi Foto (50 foto)
-                            </li>
-                        </ul>
-                        <a href="#contact" class="block text-center bg-blue-soft text-blue-soft py-3 rounded-lg hover:bg-primary-blue hover:text-white transition-colors">
-                            Pilih Paket
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Professional Package -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden transform hover:scale-105 transition-transform border-2 border-primary-blue">
-                    <div class="bg-primary-blue text-white py-2 text-center">
-                        <span class="font-semibold">Most Popular</span>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-4">Professional Package</h3>
-                        <div class="text-4xl font-bold text-blue-soft mb-6">
-                            Rp 5.000.000
-                            <span class="text-lg text-gray-500 font-normal">/event</span>
-                        </div>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                4 Kamera Full HD
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Streaming 1080p
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Dokumentasi Foto (100 foto)
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Hybrid Meeting Setup
-                            </li>
-                        </ul>
-                        <a href="#contact" class="block text-center bg-primary-blue text-white py-3 rounded-lg hover:bg-light-blue transition-colors">
-                            Pilih Paket
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Premium Package -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden transform hover:scale-105 transition-transform border border-blue-soft">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-4">Premium Package</h3>
-                        <div class="text-4xl font-bold text-blue-soft mb-6">
-                            Rp 8.000.000
-                            <span class="text-lg text-gray-500 font-normal">/event</span>
-                        </div>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                6 Kamera 4K
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Streaming 4K
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Dokumentasi Foto (200 foto)
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Full Hybrid Meeting Setup
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Video Highlight
-                            </li>
-                        </ul>
-                        <a href="#contact" class="block text-center bg-blue-soft text-blue-soft py-3 rounded-lg hover:bg-primary-blue hover:text-white transition-colors">
-                            Pilih Paket
-                        </a>
-                    </div>
-                </div>
+            <div id="pricing-cards" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Pricing cards will be rendered here by JavaScript -->
             </div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 bg-off-white">
-        <div class="container-with-spacer">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Portfolio Kami</h2>
-            <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-                Dokumentasi berbagai jenis acara yang telah kami tangani
-            </p>
+    <section id="portfolio" class="py-20 portfolio-bg">
+        <div class="container-with-spacer section-content">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold text-blue-800 mb-3">Portfolio Kami</h2>
+                <p class="text-gray-500 text-sm">Dokumentasi berbagai jenis acara yang telah kami tangani</p>
+            </div>
 
             <!-- Event Categories -->
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button class="px-6 py-2 rounded-full bg-primary-blue text-white hover:bg-light-blue transition-colors">
-                    Semua
-                </button>
-                <button class="px-6 py-2 rounded-full bg-blue-soft text-blue-soft hover:bg-primary-blue hover:text-white transition-colors">
-                    Seminar
-                </button>
-                <button class="px-6 py-2 rounded-full bg-blue-soft text-blue-soft hover:bg-primary-blue hover:text-white transition-colors">
-                    Wedding
-                </button>
-                <button class="px-6 py-2 rounded-full bg-blue-soft text-blue-soft hover:bg-primary-blue hover:text-white transition-colors">
-                    Corporate Event
-                </button>
-                <button class="px-6 py-2 rounded-full bg-blue-soft text-blue-soft hover:bg-primary-blue hover:text-white transition-colors">
-                    Konser
-                </button>
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="px-5 py-2 rounded-md bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white text-sm font-medium shadow-sm border-none hover:from-blue-700 hover:via-blue-500 hover:to-blue-300 transition-colors">Semua</button>
+                <button class="px-5 py-2 rounded-md bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white text-sm font-medium shadow-sm border-none hover:from-blue-700 hover:via-blue-500 hover:to-blue-300 transition-colors">Seminar</button>
+                <button class="px-5 py-2 rounded-md bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white text-sm font-medium shadow-sm border-none hover:from-blue-700 hover:via-blue-500 hover:to-blue-300 transition-colors">Wedding</button>
+                <button class="px-5 py-2 rounded-md bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white text-sm font-medium shadow-sm border-none hover:from-blue-700 hover:via-blue-500 hover:to-blue-300 transition-colors">Corporate Event</button>
+                <button class="px-5 py-2 rounded-md bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white text-sm font-medium shadow-sm border-none hover:from-blue-700 hover:via-blue-500 hover:to-blue-300 transition-colors">Konser</button>
             </div>
 
             <!-- Portfolio Grid -->
@@ -602,12 +891,15 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="container-with-spacer">
+    <section id="about" class="py-20 about-bg">
+        <div class="container-with-spacer section-content">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold text-blue-800 mb-3">Tentang LiveWave.id</h2>
+                <p class="text-gray-500 text-sm">Tim profesional dengan pengalaman lebih dari 5 tahun di industri multimedia</p>
+            </div>
             <div class="max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div class="space-y-6">
-                        <h2 class="text-3xl md:text-4xl font-bold">Tentang LiveWave.id</h2>
                         <p class="text-gray-600">
                             LiveWave.id adalah penyedia layanan multimedia dan streaming profesional yang berfokus pada kualitas dan inovasi. Dengan pengalaman lebih dari 5 tahun di industri, kami telah melayani berbagai jenis acara mulai dari seminar, wedding, corporate event, hingga konser.
                         </p>
@@ -654,16 +946,16 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-off-white">
-        <div class="container-with-spacer">
+    <section id="contact" class="py-20 contact-bg">
+        <div class="container-with-spacer section-content">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl font-bold text-blue-800 mb-3">Hubungi Kami</h2>
+                <p class="text-gray-500 text-sm">Tertarik dengan layanan kami? Silakan hubungi kami untuk informasi lebih lanjut</p>
+            </div>
             <div class="max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <!-- Contact Form -->
                     <div class="space-y-6">
-                        <h2 class="text-3xl md:text-4xl font-bold">Hubungi Kami</h2>
-                        <p class="text-gray-600">
-                            Tertarik dengan layanan kami? Silakan isi form di bawah ini atau hubungi kami langsung melalui kontak yang tersedia.
-                        </p>
                         <form class="space-y-4">
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
@@ -692,7 +984,7 @@
                                 <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Pesan</label>
                                 <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-blue focus:border-transparent"></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-primary-blue text-white py-3 rounded-lg hover:bg-light-blue transition-colors">
+                            <button type="submit" class="w-full bg-primary-blue text-white px-5 py-2 text-sm rounded-md hover:bg-light-blue transition-colors">
                                 Kirim Pesan
                             </button>
                         </form>
@@ -700,7 +992,7 @@
 
                     <!-- Contact Info -->
                     <div class="space-y-8">
-                        <div class="bg-white p-8 rounded-xl shadow-sm border border-blue-soft">
+                        <div class="bg-white p-8 rounded-xl shadow-sm border border-soft-blue">
                             <h3 class="text-xl font-semibold mb-6">Informasi Kontak</h3>
                             <div class="space-y-4">
                                 <div class="flex items-center space-x-4">
@@ -741,7 +1033,7 @@
                         </div>
 
                         <!-- Social Media -->
-                        <div class="bg-white p-8 rounded-xl shadow-sm border border-blue-soft">
+                        <div class="bg-white p-8 rounded-xl shadow-sm border border-soft-blue">
                             <h3 class="text-xl font-semibold mb-6">Ikuti Kami</h3>
                             <div class="flex space-x-4">
                                 <a href="#" class="w-12 h-12 bg-primary-blue rounded-full flex items-center justify-center hover:bg-light-blue transition-colors">
@@ -773,7 +1065,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white text-text-dark py-12 border-t border-blue-soft">
+    <footer class="bg-white text-text-dark py-12 border-t border-soft-blue">
         <div class="container-with-spacer">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="space-y-4">
@@ -816,39 +1108,68 @@
                     </form>
                 </div>
             </div>
-            <div class="border-t border-blue-soft mt-12 pt-8 text-center text-text-light">
+            <div class="border-t border-soft-blue mt-12 pt-8 text-center text-text-light">
                 <p>&copy; 2024 LiveWave.id. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Custom JS for GSAP animations -->
+    <script src="js/pricing.js"></script>
     <script>
         // Initialize GSAP
         gsap.registerPlugin(ScrollTrigger);
 
-        // Hero section animation
+        // Enhanced hero section animations
         gsap.from("#home h1", {
-            duration: 1,
+            duration: 1.5,
             y: 100,
             opacity: 0,
-            ease: "power4.out"
+            ease: "power4.out",
+            delay: 0.2
         });
 
         gsap.from("#home p", {
-            duration: 1,
+            duration: 1.2,
             y: 50,
             opacity: 0,
-            delay: 0.3,
+            delay: 0.5,
             ease: "power4.out"
         });
 
         gsap.from("#home img", {
-            duration: 1,
+            duration: 1.2,
             x: 100,
             opacity: 0,
-            delay: 0.5,
+            delay: 0.7,
             ease: "power4.out"
+        });
+
+        gsap.from("#home .hero-buttons", {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.9,
+            ease: "power3.out"
+        });
+
+        // Add floating animation to hero image
+        gsap.to("#home img", {
+            duration: 2,
+            y: "10px",
+            ease: "power1.inOut",
+            repeat: -1,
+            yoyo: true
+        });
+
+        // Add subtle scale animation to hero buttons
+        gsap.to("#home .hero-btn", {
+            duration: 1.5,
+            scale: 1.05,
+            ease: "power1.inOut",
+            repeat: -1,
+            yoyo: true,
+            stagger: 0.2
         });
 
         // Services section animation
